@@ -17,14 +17,14 @@
             border-radius: 8px;
         }
 
-        .inner-container p {
+        .inner-container p { <!--aligning text within inner container to be on the left-->
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
 
-        .inner-container input {
+        .inner-container input { <!--aligning input box within inner container to be on the right-->
             text-align: left;
             width: 200px;
         }
@@ -46,7 +46,7 @@
             color: white;
             border: none;
             padding: 20px 20px;
-            border-radius: cursor: pointer;
+            cursor: pointer;
             font-size: 24px;
         }
     </style>
@@ -79,7 +79,7 @@
             <hr></hr>
         </div>
 
-        <div class="inner-container" style="margin-bottom: 20px; text-align: center;">
+        <div class="inner-container" text-align: center;">
             <button class="btn btn-submit">Submit Claim</button>
         </div>
     </div>
