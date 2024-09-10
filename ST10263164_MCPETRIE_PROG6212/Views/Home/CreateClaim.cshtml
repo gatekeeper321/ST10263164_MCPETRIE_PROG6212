@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Create Claim";
+}
+<head>
+    <style>
+        .outer-container {
+            background-color: #007bff;
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .inner-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .inner-container p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .inner-container input {
+            text-align: left;
+            width: 200px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        .btn-submit {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 20px 20px;
+            border-radius: cursor: pointer;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer-container">
+        <div class="inner-container" style="margin-bottom: 20px;">
+            <h2>Create A New Claim</h2>
+        </div>
+
+        <div class="inner-container" style="margin-bottom: 20px;">
+            <h3>Your Documentation</h3>
+            <hr></hr>
+            <p>Your Supporting Document: <input type="file" name="SupportingDoc" /></p>
+            <hr></hr>
+        </div>
+
+        <div class="inner-container" style="margin-bottom: 20px;">
+            <h3>Your Information</h3>
+            <hr></hr>
+            <p>Your lecturer ID: <input type="text" name="lecturerID"/></p>
+            <hr></hr>
+            <p>Your Contract ID: <input type="text" name="ContractID" /></p>
+            <hr></hr>
+            <p>Hourly Rate: <input type="text" name="HourlyRate" /></p>
+            <hr></hr>
+            <p>Hours Worked: <input type="text" name="HoursWorked" /></p>
+            <hr></hr>
+            <p>Claim Total: <input type="text" name="ClaimTotal" /></p>
+            <hr></hr>
+        </div>
+
+        <div class="inner-container" style="margin-bottom: 20px; text-align: center;">
+            <button class="btn btn-submit">Submit Claim</button>
+        </div>
+    </div>
+</body>

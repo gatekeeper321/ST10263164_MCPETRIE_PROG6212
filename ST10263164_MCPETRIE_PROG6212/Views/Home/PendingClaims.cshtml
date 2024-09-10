@@ -1,0 +1,197 @@
+﻿@{
+    ViewData["Title"] = "Pending Claims";
+}
+<head>
+    <style>
+        .outer-container {
+            background-color: #007bff;
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .inner-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        h3{
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn-approve {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius:
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-deny {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-pending {
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer-container" >
+        <div class="inner-container" style="margin-bottom: 20px;">
+            <h2>All Pending Claims</h2>
+        </div>
+
+        <div class="inner-container" style="margin-bottom: 20px;">
+            <h3>Claims Pending Your Approval</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Claim ID</th>
+                        <th>Lecturer ID</th>
+                        <th>Contract ID</th>
+                        <th>Supporting Documents</th>
+                        <th>Amount</th>
+                        <th>Date Of Claim</th>
+                        <th>Approval Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0001</td>
+                        <td>1212</td>
+                        <td>7878</td>
+                        <td><a href="https://document/0001" target="_blank">Doc_0001</a></td>
+                        <td>R1200.00</td>
+                        <td>01/09/2024</td>
+                        <td>
+                            <button class="btn btn-approve">Approve</button>
+                            <button class="btn btn-deny">Deny</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>0002</td>
+                        <td>1214</td>
+                        <td>3452</td>
+                        <td><a href="https://document/0002" target="_blank">Doc_0002</a></td>
+                        <td>R2400.00</td>
+                        <td>10/09/2024</td>
+                        <td>
+                            <button class="btn btn-approve">Approve</button>
+                            <button class="btn btn-deny">Deny</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>0003</td>
+                        <td>1216</td>
+                        <td>6789</td>
+                        <td><a href="https://document/0003" target="_blank">Doc_0003</a></td>
+                        <td>R5500.00</td>
+                        <td>01/08/2024</td>
+                        <td>
+                            <button class="btn btn-approve">Approve</button>
+                            <button class="btn btn-deny">Deny</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>0007</td>
+                        <td>1217</td>
+                        <td>6787</td>
+                        <td><a href="https://document/0007" target="_blank">Doc_0007</a></td>
+                        <td>R5700.00</td>
+                        <td>03/09/2024</td>
+                        <td>
+                            <button class="btn btn-approve">Approve</button>
+                            <button class="btn btn-deny">Deny</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="inner-container">
+            <h3>Claims Pending Further Approval</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Claim ID</th>
+                        <th>Lecturer ID</th>
+                        <th>Contract ID</th>
+                        <th>Supporting Documents</th>
+                        <th>Amount</th>
+                        <th>Date Of Claim</th>
+                        <th>Approval Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0004</td>
+                        <td>1212</td>
+                        <td>7878</td>
+                        <td><a href="https://document/0004" target="_blank">Doc_0004</a></td>
+                        <td>R1200.00</td>
+                        <td>09/09/2024</td>
+                        <td>
+                            <button class="btn btn-pending">Pending...</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>0005</td>
+                        <td>1214</td>
+                        <td>3452</td>
+                        <td><a href="https://document/0005" target="_blank">Doc_0005</a></td>
+                        <td>R2400.00</td>
+                        <td>08/09/2024</td>
+                        <td>
+                            <button class="btn btn-pending">Pending...</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>0006</td>
+                        <td>1216</td>
+                        <td>6789</td>
+                        <td><a href="https://document/0006" target="_blank">Doc_0006</a></td>
+                        <td>R5500.00</td>
+                        <td>07/09/2024</td>
+                        <td>
+                            <button class="btn btn-pending">Pending...</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
