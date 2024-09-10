@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ST10263164_MCPETRIE_PROG6212.styles.css" asp-append-version="true" />
+    <style>
+        .nav-item-login {
+            margin-left: auto;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,6 +35,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" style="font-size: 24px; text-decoration: underline" asp-area="" asp-controller="Home" asp-action="MyClaims">My Claims</a>
+                        </li>
+                        <li class="nav-item-login">
+                            <a class="nav-link text-white" style="font-size: 24px; text-decoration: underline;" asp-area="" asp-controller="Home" asp-action="SelectLogin">Login</a>
                         </li>
                     </ul>
                 </div>

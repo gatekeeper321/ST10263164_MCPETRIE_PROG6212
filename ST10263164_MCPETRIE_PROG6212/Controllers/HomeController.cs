@@ -29,6 +29,10 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
         {
             return View();
         }
+        public IActionResult SelectLogin()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

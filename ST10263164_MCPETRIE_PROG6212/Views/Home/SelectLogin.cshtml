@@ -1,5 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Create Claim";
 }
+
+<head>
+    <style>
+        .outer-container {
+            background-color: #007bff;
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .inner-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .btn-loginType {
+            background-color: white;
+            color: black;
+            border: 5 px;
+            border-color: black;
+            padding: 20px 30px;
+            border-radius: cursor: pointer;
+            font-size: 24px;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer-container">
+        <div class="inner-container">
+            <h2>Select Your Role</h2>
+            <hr></hr>
+            <button class="btn btn-loginType" style="margin-bottom: 20px">Lecturer</button>
+            <button class="btn btn-loginType" style="margin-bottom: 20px">Programme Coordinator</button>
+            <button class="btn btn-loginType">Academic Manager</button>
+            <hr></hr>
+            <p>This login portal will direct you to either lecturer, PC or AM portals which determine what pages you will have access to,</p>
+            <p>lecturers may only create and view previous claims while PC and AM may approve and deny claims</p>
+        </div>
+    </div>
+</body>
