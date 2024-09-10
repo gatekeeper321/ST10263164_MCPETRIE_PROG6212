@@ -19,12 +19,34 @@
             text-align: center;
         }
 
-        h2 {
+        h1 {
             text-align: center;
         }
 
-        .btn-loginType {
-            background-color: white;
+        .btn-Lecturer {
+            background-color: lightyellow;
+            color: black;
+            border: 5 px;
+            border-color: black;
+            padding: 20px 30px;
+            border-radius: cursor: pointer;
+            font-size: 24px;
+            width: 90%;
+        }
+
+        .btn-PC {
+            background-color: lightblue;
+            color: black;
+            border: 5 px;
+            border-color: black;
+            padding: 20px 30px;
+            border-radius: cursor: pointer;
+            font-size: 24px;
+            width: 90%;
+        }
+
+        .btn-AM {
+            background-color: indianred;
             color: black;
             border: 5 px;
             border-color: black;
@@ -38,11 +60,11 @@
 <body>
     <div class="outer-container">
         <div class="inner-container">
-            <h2>Select Your Role</h2>
+            <h1>Select Your Role</h1>
             <hr></hr>
-            <button class="btn btn-loginType" style="margin-bottom: 20px">Lecturer</button>
-            <button class="btn btn-loginType" style="margin-bottom: 20px">Programme Coordinator</button>
-            <button class="btn btn-loginType">Academic Manager</button>
+            <button class="btn btn-Lecturer" style="margin-bottom: 20px">Lecturer</button>
+            <button class="btn btn-PC" style="margin-bottom: 20px">Programme Coordinator</button>
+            <button class="btn btn-AM">Academic Manager</button>
             <hr></hr>
             <p>This login portal will direct you to either lecturer, PC or AM portals which determine what pages you will have access to,</p>
             <p>lecturers may only create and view previous claims while PC and AM may approve and deny claims</p>
