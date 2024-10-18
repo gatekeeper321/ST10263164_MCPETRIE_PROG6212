@@ -28,11 +28,11 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
         //aprovals
 
         [HttpPost]
-        public IActionResult ApproveClaimPC(int claimId)
+        public IActionResult ApproveClaimPC(int claimId) // This is the action method that will be called when the user navigates to the PendingClaims(programme coordinator) page
         {
             var record = _dbContext.Claims.FirstOrDefault(c => c.ClaimId == claimId);
 
-            if (record == null)
+            if (record == null) 
             {
                 return NotFound();
             }
@@ -41,9 +41,9 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
 
             if (record.AcademicManagerApproval == true)
             {
-                record.OverallAproval = "Approved";
+                record.OverallAproval = "Approved"; //approves the claim if both the programme coordinator and academic manager have approved it
 
-                var pendingClaims = _dbContext.Claims
+                var pendingClaims = _dbContext.Claims //this is the list of all claims that are pending
                     .Where(c => c.ProgrammeCoordinatorApproval == false)
                     .ToList();
 
@@ -52,11 +52,11 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                     Claims = pendingClaims
                 };
 
-                _dbContext.SaveChanges();
+                _dbContext.SaveChanges(); //saves the changes to the database
                 return View("PendingClaims", model);
             }
 
-            var allPendingClaims = _dbContext.Claims
+            var allPendingClaims = _dbContext.Claims //this is the list of all claims that are pending
                 .Where(c => c.ProgrammeCoordinatorApproval == false)
                 .ToList();
 
@@ -65,12 +65,12 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                 Claims = allPendingClaims
             };
 
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges(); //saves the changes to the database
             return View("PendingClaims", allPendingClaimsModel);
         }
 
         [HttpPost]
-        public IActionResult ApproveClaimAM(int claimId)
+        public IActionResult ApproveClaimAM(int claimId) // This is the action method that will be called when the user navigates to the PendingClaims(academic manager) page
         {
             var record = _dbContext.Claims.FirstOrDefault(c => c.ClaimId == claimId);
 
@@ -83,9 +83,9 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
 
             if (record.ProgrammeCoordinatorApproval == true)
             {
-                record.OverallAproval = "Approved";
+                record.OverallAproval = "Approved"; //approves the claim if both the programme coordinator and academic manager have approved it
 
-                var pendingClaims = _dbContext.Claims
+                var pendingClaims = _dbContext.Claims //this is the list of all claims that are pending
                     .Where(c => c.AcademicManagerApproval == false)
                     .ToList();
 
@@ -94,11 +94,11 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                     Claims = pendingClaims
                 };
 
-                _dbContext.SaveChanges();
+                _dbContext.SaveChanges(); //saves the changes to the database
                 return View("PendingClaims", pendingClaims);
             }
 
-            var allPendingClaims = _dbContext.Claims
+            var allPendingClaims = _dbContext.Claims //this is the list of all claims that are pending
                 .Where(c => c.AcademicManagerApproval == false)
                 .ToList();
 
@@ -107,14 +107,14 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                 Claims = allPendingClaims
             };
 
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges(); //saves the changes to the database
             return View("PendingClaims", allPendingClaimsModel);
         }
 
         //denials
 
         [HttpPost]
-        public IActionResult DenyClaimPC(int claimId)
+        public IActionResult DenyClaimPC(int claimId) // This is the action method that will be called when the user navigates to the PendingClaims(programme coordinator) page
         {
             var record = _dbContext.Claims.FirstOrDefault(c => c.ClaimId == claimId);
 
@@ -126,7 +126,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             record.ProgrammeCoordinatorApproval = false;
             record.OverallAproval = "Denied";
 
-            var allPendingClaims = _dbContext.Claims
+            var allPendingClaims = _dbContext.Claims //this is the list of all claims that are pending
                 .Where(c => c.ProgrammeCoordinatorApproval == false)
                 .ToList();
 
@@ -135,12 +135,12 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                 Claims = allPendingClaims
             };
 
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges(); //saves the changes to the database
             return View("PendingClaims", allPendingClaimsModel);
         }
 
         [HttpPost]
-        public IActionResult DenyClaimAM(int claimId)
+        public IActionResult DenyClaimAM(int claimId) // This is the action method that will be called when the user navigates to the PendingClaims(academic manager) page
         {
             var record = _dbContext.Claims.FirstOrDefault(c => c.ClaimId == claimId);
 
@@ -152,7 +152,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             record.AcademicManagerApproval = false;
             record.OverallAproval = "Denied";
 
-            var allPendingClaims = _dbContext.Claims
+            var allPendingClaims = _dbContext.Claims //this is the list of all claims that are pending
                 .Where(c => c.ProgrammeCoordinatorApproval == false)
                 .ToList();
 
@@ -161,14 +161,14 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                 Claims = allPendingClaims
             };
 
-            _dbContext.SaveChanges();
+            _dbContext.SaveChanges(); //saves the changes to the database
             return View("PendingClaims", allPendingClaimsModel);
         }
 
         ///////////////////
 
 
-        public async Task<IActionResult> PendingClaims()
+        public async Task<IActionResult> PendingClaims() // This is the action method that will be called when the user navigates to the PendingClaims page
         {
             var PendingClaims = await _dbContext.Claims
                 .Where(c => c.OverallAproval == "pending")
@@ -182,7 +182,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> PendingClaimsAM()
+        public async Task<IActionResult> PendingClaimsAM() // This is the action method that will be called when the user navigates to the PendingClaims page
         {
             var PendingClaims = await _dbContext.Claims
                 .Where(c => c.OverallAproval == "pending")
@@ -196,7 +196,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View(model);
         }
 
-        public IActionResult MyClaims()
+        public IActionResult MyClaims() // This is the action method that will be called when the user navigates to the MyClaims page
         {
             var claims = _dbContext.Claims.ToList();
             var viewModel = new MyClaimsViewModel
@@ -218,7 +218,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateClaim(Claim claim, IFormFile supportingDocuments)
+        public async Task<IActionResult> CreateClaim(Claim claim, IFormFile supportingDocuments) // This is the action method that will be called when the user submits the form on the CreateClaim page
         {
             if (!ModelState.IsValid)
             {
@@ -260,7 +260,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AcademicManager model)
+        public IActionResult Create(AcademicManager model) // This is the action method that will be called when the user submits the form on the Create page
         {
             if (!ModelState.IsValid)
             {
