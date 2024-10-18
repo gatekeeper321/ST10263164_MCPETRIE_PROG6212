@@ -91,11 +91,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model?.Claims != null)
+                    @if (Model?.Claims != null) //if there are claims in the model this will loop through them
                     {
-                        foreach (var claim in Model.Claims)
+                        foreach (var claim in Model.Claims) //allows each claim to be displayed in the table one at a time
                         {
-                            if ((claim.ProgrammeCoordinatorApproval == false) && (claim.OverallAproval == "pending"))
+                            if ((claim.ProgrammeCoordinatorApproval == false) && (claim.OverallAproval == "pending")) //if the claim is pending and the programme coordinator has not approved it, it will be displayed in the table so that they may approve or deny it
                             {
                                 <tr>
                                     <td>@claim.ClaimId</td>
@@ -105,11 +105,11 @@
                                     <td>@claim.ClaimTotal</td>
                                     <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
                                     <td>
-                                        <form method="post" action="/Home/ApproveClaimPC">
+                                        <form method="post" action="/Home/ApproveClaimPC"> <!--calls action from homecontolller so button has function-->
                                             <input type="hidden" name="claimId" value="@claim.ClaimId" />
                                             <button type="submit" class="btn btn-approve">Approve</button>
                                         </form>
-                                        <form method="post" action="/Home/DenyClaimPC">
+                                        <form method="post" action="/Home/DenyClaimPC"> <!--calls action from homecontolller so button has function-->
                                             <input type="hidden" name="claimId" value="@claim.ClaimId" />
                                             <button type="submit" class="btn btn-deny">Deny</button>
                                         </form>
@@ -137,11 +137,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model?.Claims != null)
+                    @if (Model?.Claims != null) //if there are claims in the model this will loop through them
                     {
-                        foreach (var claim in Model.Claims)
+                        foreach (var claim in Model.Claims) //allows each claim to be displayed in the table one at a time
                         {
-                            if ((claim.OverallAproval == "pending") && (claim.ProgrammeCoordinatorApproval == true))
+                            if ((claim.OverallAproval == "pending") && (claim.ProgrammeCoordinatorApproval == true)) //if the claim is pending and the programme coordinator has approved it, it will be displayed in the table
                             {
                                 <tr>
                                     <td>@claim.ClaimId</td>
