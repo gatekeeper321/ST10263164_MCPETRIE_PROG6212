@@ -81,6 +81,7 @@
                     <tr>
                         <th>Claim ID</th>
                         <th>Contract ID</th>
+                        <th>Lecturer ID</th>
                         <th>Supporting Documents</th>
                         <th>Amount</th>
                         <th>Date Of Claim</th>
@@ -88,7 +89,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @if (Model?.Claims != null)
+                    {
+                        foreach (var claim in Model.Claims)
+                        {
+                            if (claim.OverallAproval == "pending")
+                            {
+                                <tr>
+                                    <td>@claim.ClaimId</td>
+                                    <td>@claim.LecturerId</td>
+                                    <td>@claim.ContractId</td>
+                                    <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
+                                    <td>@claim.ClaimTotal</td>
+                                    <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
+                                    <td>
+                                        <button class="btn btn-pending">pending...</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
                 </tbody>
             </table>
         </div>
@@ -99,6 +119,7 @@
                 <thead>
                     <tr>
                         <th>Claim ID</th>
+                        <th>Lecturer ID</th>
                         <th>Contract ID</th>
                         <th>Supporting Documents</th>
                         <th>Amount</th>
@@ -107,7 +128,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @if (Model?.Claims != null)
+                    {
+                        foreach (var claim in Model.Claims)
+                        {
+                            if (claim.OverallAproval == "Approved")
+                            {
+                                <tr>
+                                    <td>@claim.ClaimId</td>
+                                    <td>@claim.LecturerId</td>
+                                    <td>@claim.ContractId</td>
+                                    <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
+                                    <td>@claim.ClaimTotal</td>
+                                    <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
+                                    <td>
+                                        <button class="btn btn-approved">Approved</button>
+                                    </td>
+                                </tr>
+                            }
+
+                            if (claim.OverallAproval == "Denied")
+                            {
+                                <tr>
+                                    <td>@claim.ClaimId</td>
+                                    <td>@claim.LecturerId</td>
+                                    <td>@claim.ContractId</td>
+                                    <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
+                                    <td>@claim.ClaimTotal</td>
+                                    <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
+                                    <td>
+                                        <button class="btn btn-denied">Denied</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
                 </tbody>
             </table>
         </div> 

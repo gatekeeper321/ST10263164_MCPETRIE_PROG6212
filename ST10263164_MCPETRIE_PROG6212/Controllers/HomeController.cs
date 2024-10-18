@@ -198,7 +198,12 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
 
         public IActionResult MyClaims()
         {
-            return View();
+            var claims = _dbContext.Claims.ToList();
+            var viewModel = new MyClaimsViewModel
+            {
+                Claims = claims
+            };
+            return View(viewModel);
         }
 
         public IActionResult SelectLogin()
