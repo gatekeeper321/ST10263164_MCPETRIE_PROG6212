@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Claim
+
+@{
     ViewData["Title"] = "Create Claim";
 }
 <head>
@@ -15,18 +17,29 @@
             background-color: white;
             padding: 20px;
             border-radius: 8px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .inner-container p { /*aligning text within inner container to be on the left*/
+        .inner-container p {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
 
-            .inner-container input { /*aligning input box within inner container to be on the right*/
+        .inner-container .form-group {
+            margin-bottom: 20px;
+        }
+
+        .inner-container input {
             text-align: left;
-            width: 200px;
+            width: 100%;
+            width: 600px;
+            margin-bottom: 20px;
         }
 
         h2 {
@@ -51,36 +64,40 @@
         }
     </style>
 </head>
-<body>
-    <div class="outer-container">
-        <div class="inner-container" style="margin-bottom: 20px;">
-            <h2>Create A New Claim</h2>
+<form asp-action="CreateClaim" method="post" enctype="multipart/form-data">
+    <div class="form-group outer-container">
+        <div class="form-group inner-container" style="margin-bottom: 20px; justify-content: center;">
+            <h1>Create a claim below:</h1>
         </div>
-
-        <div class="inner-container" style="margin-bottom: 20px;">
-            <h3>Your Documentation</h3>
-            <hr></hr>
-            <p>Your Supporting Document: <input type="file" name="SupportingDoc" /></p>
-            <hr></hr>
-        </div>
-
-        <div class="inner-container" style="margin-bottom: 20px;">
-            <h3>Your Information</h3>
-            <hr></hr>
-            <p>Your lecturer ID: <input type="text" name="lecturerID"/></p>
-            <hr></hr>
-            <p>Your Contract ID: <input type="text" name="ContractID" /></p>
-            <hr></hr>
-            <p>Hourly Rate: <input type="text" name="HourlyRate" /></p>
-            <hr></hr>
-            <p>Hours Worked: <input type="text" name="HoursWorked" /></p>
-            <hr></hr>
-            <p>Claim Total: <input type="text" name="ClaimTotal" /></p>
-            <hr></hr>
-        </div>
-
-        <div class="inner-container" text-align: center;">
-            <button class="btn btn-submit">Submit Claim</button>
+        <div class="form-group inner-container" style="margin-bottom: 20px; justify-content: center;">
+            <div class="form-group">
+                <label asp-for="LecturerId" class="control-label"></label>
+                <input asp-for="LecturerId" class="form-control" />
+                <span asp-validation-for="LecturerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContractId" class="control-label"></label>
+                <input asp-for="ContractId" class="form-control" />
+                <span asp-validation-for="ContractId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HourlyRate" class="control-label"></label>
+                <input asp-for="HourlyRate" class="form-control" />
+                <span asp-validation-for="HourlyRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoursWorked" class="control-label"></label>
+                <input asp-for="HoursWorked" class="form-control" />
+                <span asp-validation-for="HoursWorked" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupportingDocument" class="control-label"></label>
+                <input asp-for="SupportingDocument" type="file" class="form-control" name="supportingDocuments" />
+                <span asp-validation-for="SupportingDocument" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit Claim" class="btn btn-primary" style="width: 200px; text-align: center;" />
+            </div>
         </div>
     </div>
-</body>
+</form>

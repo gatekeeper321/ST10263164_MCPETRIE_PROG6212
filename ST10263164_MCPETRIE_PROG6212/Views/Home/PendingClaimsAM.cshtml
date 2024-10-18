@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "PC Pending Claims";
+    ViewData["Title"] = "AM Pending Claims";
 }
 <head>
     <style>
@@ -17,11 +17,11 @@
             border-radius: 8px;
         }
 
-        h2{
+        h2 {
             text-align: center;
         }
 
-        h3{
+        h3 {
             text-align: center;
         }
 
@@ -30,7 +30,7 @@
             border-collapse: collapse; /*makes neighbouring blocks share borders*/
         }
 
-        th, td { /*table header and table data structure*/ 
+        th, td { /*table header and table data structure*/
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -67,17 +67,15 @@
             font-size: 16px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="outer-container" >
+    <div class="outer-container">
         <div class="inner-container" style="margin-bottom: 20px;">
             <h2>All Pending Claims</h2>
         </div>
 
         <div class="inner-container" style="margin-bottom: 20px;">
-            <h3>Claims Pending Programme Coordinator Approval</h3>
-            @Html.AntiForgeryToken()
+            <h3>Claims Pending Academic Manager Approval</h3>
             <table>
                 <thead>
                     <tr>
@@ -95,21 +93,21 @@
                     {
                         foreach (var claim in Model.Claims)
                         {
-                            if ((claim.ProgrammeCoordinatorApproval == false) && (claim.OverallAproval == "pending"))
+                            if ((claim.AcademicManagerApproval == false) && (claim.OverallAproval == "pending"))
                             {
                                 <tr>
-                                    <td>@claim.ClaimId</td>
-                                    <td>@claim.LecturerId</td>
-                                    <td>@claim.ContractId</td>
+                                    <td>@(claim.ClaimId)</td>
+                                    <td>@(claim.LecturerId)</td>
+                                    <td>@(claim.ContractId)</td>
                                     <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
-                                    <td>@claim.ClaimTotal</td>
-                                    <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
+                                    <td>@(claim.ClaimTotal)</td>
+                                    <td>@(claim.ClaimDate.ToString("MM/dd/yyyy"))</td>
                                     <td>
-                                        <form method="post" action="/Home/ApproveClaimPC">
+                                        <form method="post" action="/Home/ApproveClaimAM">
                                             <input type="hidden" name="claimId" value="@claim.ClaimId" />
                                             <button type="submit" class="btn btn-approve">Approve</button>
                                         </form>
-                                        <form method="post" action="/Home/DenyClaimPC">
+                                        <form method="post" action="/Home/DenyClaimAM">
                                             <input type="hidden" name="claimId" value="@claim.ClaimId" />
                                             <button type="submit" class="btn btn-deny">Deny</button>
                                         </form>
@@ -137,7 +135,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                </tbody>
+                <tbody>
                 </tbody>
             </table>
         </div>
