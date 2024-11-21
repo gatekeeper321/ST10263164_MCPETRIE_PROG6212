@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "View Lecturers";
+}
+<head>
+    <style>
+        .outer-container {
+            background-color: #007bff;
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .inner-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        table { /*table size and structure*/
+            width: 100%; /*makes table the size of inner(parent) container*/
+            border-collapse: collapse; /*makes neighbouring blocks share borders*/
+        }
+
+        th, td { /*table header and table data structure*/
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th { /*tabel header colour*/
+            background-color: #f2f2f2;
+        }
+
+        .btn-approved {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-denied {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-pending {
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer-container">
+        <div class="inner-container" style="margin-bottom: 20px;">
+            <h2>Your Claim History</h2>
+        </div>
+
+        <div class="inner-container" style="margin-bottom: 20px;">
+            <h3>Claims Pending Approval</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lecturer ID</th>
+                        <th>Lecturer Name</th>
+                        <th>Lecturer Surname</th>
+                        <th>Lecturer Email</th>
+                        <th>Lecturer Contact Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model?.Claims != null)
+                    {
+                        foreach (var claim in Model.Claims)
+                        {
+                            <tr>
+                                <td>@claim.ClaimId</td>
+                                <td>@claim.LecturerId</td>
+                                <td>@claim.ContractId</td>
+                                <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
+                                <td>@claim.ClaimTotal</td>
+                                <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
+                                <td>
+                                    <button class="btn btn-pending">pending...</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
