@@ -78,7 +78,7 @@
             </div>
         </div>
     </form>
-    @if (Model != null && Model.ClaimId > 0)
+    @if (Model != null && Model.ClaimId > 0) // shows readonly input boxes once valid claim id is entered and data will be populated within the input boxes
     {
         <form asp-action="CreateInvoice" method="post" enctype="multipart/form-data">
             <div class="form-group inner-container" style="margin-bottom: 20px; justify-content: center;">

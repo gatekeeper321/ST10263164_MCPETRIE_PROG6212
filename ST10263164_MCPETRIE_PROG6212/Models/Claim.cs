@@ -41,10 +41,10 @@ namespace ST10263164_MCPETRIE_PROG6212.Models
         public Claim()
         {
             ClaimDate = DateTime.Now;
-            OverallAproval = "pending";
+            OverallAproval = "pending"; // sets the default value of the OverallAproval to pending, changed in home controller automatically if approval criteria met
         }
 
-        public Claim(int hoursWorked, int hourlyRate)
+        public Claim(int hoursWorked, int hourlyRate)  
         {
             HoursWorked = hoursWorked;
             HourlyRate = hourlyRate;

@@ -85,8 +85,8 @@
                         <th>Lecturer ID</th>
                         <th>Contract ID</th>
                         <th>Supporting Documents</th>
-                        <th>Hourly Rate</th>
-                        <th>Hours Worked</th>
+                        <th>Hourly Rate</th> <!--added this column-->
+                        <th>Hours Worked</th> <!--added this column-->
                         <th>Claim Total</th>
                         <th>Date Of Claim</th>
                         <th>Approve/Deny</th>
@@ -112,7 +112,7 @@
                                     {
                                         <td>@claim.HourlyRate</td>
                                     }
-                                    @if (@claim.HoursWorked > 20) //checks if hourly rate is reason claim was not approved and if it is it will be highlighted red
+                                    @if (@claim.HoursWorked > 20) //checks if hourls worked is reason claim was not approved and if it is it will be highlighted red
                                     {
                                         <td style="color: red;">@claim.HoursWorked</td>
                                     }
