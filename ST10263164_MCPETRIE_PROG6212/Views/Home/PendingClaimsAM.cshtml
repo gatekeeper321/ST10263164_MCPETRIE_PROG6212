@@ -102,7 +102,7 @@
                                     <td>@(claim.LecturerId)</td>
                                     <td>@(claim.ContractId)</td>
                                     <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
-                                    @if (claim.HourlyRate > 500)
+                                    @if (claim.HourlyRate > 500) //if the hourly rate is greater than 500 it will be displayed in red
                                     {
                                         <td style="color: red;">@claim.HourlyRate</td>
                                     }
@@ -110,7 +110,7 @@
                                     {
                                         <td>@claim.HourlyRate</td>
                                     }
-                                    @if (@claim.HoursWorked > 20)
+                                    @if (@claim.HoursWorked > 20) //if the hours worked is greater than 20 it will be displayed in red
                                     {
                                         <td style="color: red;">@claim.HoursWorked</td>
                                     }

@@ -30,7 +30,8 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View(claims);
         }
 
-        //aprovals
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------APPROVALS----------------------------------------------------------------------------------
 
         [HttpPost]
         public IActionResult ApproveClaimPC(int claimId) // This is the action method that will be called when the user navigates to the PendingClaims(programme coordinator) page
@@ -116,7 +117,8 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View("PendingClaims", allPendingClaimsModel);
         }
 
-        //denials
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //------------------------------------------------------------DENIALS--------------------------------------------------------------------------------------
 
         [HttpPost]
         public IActionResult DenyClaimPC(int claimId) // This is the action method that will be called when the user navigates to the PendingClaims(programme coordinator) page
@@ -170,8 +172,8 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View("PendingClaims", allPendingClaimsModel);
         }
 
-        ///////////////////
-
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public async Task<IActionResult> PendingClaims() // This is the action method that will be called when the user navigates to the PendingClaims page
         {
@@ -201,6 +203,9 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View(model);
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public IActionResult MyClaims() // This is the action method that will be called when the user navigates to the MyClaims page
         {
             var claims = _dbContext.Claims.ToList();
@@ -210,6 +215,9 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             };
             return View(viewModel);
         }
+
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
         public IActionResult ViewLecturers() // This is the action method that will be called when the user navigates to the ViewLecturers page
         {
@@ -221,10 +229,16 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View(viewModel);
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+
         public IActionResult SelectLogin()
         {
             return View();
         }
+
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------CREATE CLAIM-------------------------------------------------------------------------------------
 
         [HttpGet]
         public IActionResult CreateClaim()
@@ -279,6 +293,10 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return RedirectToAction("Index");
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------ADD LECTURER--------------------------------------------------------------------------------
+
         [HttpGet]
         public IActionResult AddLecturer()
         {
@@ -313,7 +331,9 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------
         //-------------------------------------------------------------EDIT LECTURER-------------------------------------------------------------------------------
+        
         [HttpGet]
         public IActionResult EditLecturer()
         {
@@ -321,7 +341,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetLecturerData(Lecturer lecturer)
+        public async Task<IActionResult> GetLecturerData(Lecturer lecturer) //This action method fetches the lecturer data from the database and populates the form fields with the data
         {
             var existingLecturer = await _dbContext.Lecturers.FindAsync(lecturer.LecturerId);
 
@@ -380,6 +400,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                 return View("EditLecturer", lecturer); // Return the EditLecturer view with the model to show the error
             }
         }
+
         //--------------------------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------CREATE DOC--------------------------------------------------------------------
         
@@ -466,9 +487,8 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                     document.Add(new Paragraph("Signature"));
                     document.Add(new Paragraph("HR representitive"));
 
-
-                    document.Close();
-                    return ms.ToArray();
+                    document.Close(); //closes doc
+                    return ms.ToArray(); //returns the created pdf document as a byte array
                 }
             }
             catch (Exception ex)
@@ -478,6 +498,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             }
         }
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
@@ -497,6 +518,9 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             // Proceed with saving the model
             return RedirectToAction("Index");
         }
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
     }
 
 
