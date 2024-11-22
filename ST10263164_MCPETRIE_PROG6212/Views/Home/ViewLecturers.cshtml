@@ -40,42 +40,15 @@
             background-color: #f2f2f2;
         }
 
-        .btn-approved {
-            background-color: green;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn-denied {
-            background-color: red;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn-pending {
-            background-color: orange;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
     <div class="outer-container">
         <div class="inner-container" style="margin-bottom: 20px;">
-            <h2>Your Claim History</h2>
+            <h2>All Lecturers</h2>
         </div>
 
         <div class="inner-container" style="margin-bottom: 20px;">
-            <h3>Claims Pending Approval</h3>
             <table>
                 <thead>
                     <tr>
@@ -87,20 +60,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model?.Claims != null)
+                    @if (Model?.Lecturer != null)
                     {
-                        foreach (var claim in Model.Claims)
+                        foreach (var lecturer in Model.Lecturer)
                         {
                             <tr>
-                                <td>@claim.ClaimId</td>
-                                <td>@claim.LecturerId</td>
-                                <td>@claim.ContractId</td>
-                                <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
-                                <td>@claim.ClaimTotal</td>
-                                <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
-                                <td>
-                                    <button class="btn btn-pending">pending...</button>
-                                </td>
+                                <td>@lecturer.LecturerId</td>
+                                <td>@lecturer.LecturerName</td>
+                                <td>@lecturer.LecturerSurname</td>
+                                <td>@lecturer.LecturerEmail</td>
+                                <td>@lecturer.LecturerContactNumber</td>
                             </tr>
                         }
                     }
