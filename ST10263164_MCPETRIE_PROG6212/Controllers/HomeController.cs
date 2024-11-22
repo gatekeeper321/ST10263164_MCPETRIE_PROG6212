@@ -1,10 +1,15 @@
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ST10263164_MCPETRIE_PROG6212.Data;
 using ST10263164_MCPETRIE_PROG6212.Models;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Document = iTextSharp.text.Document;
 
 namespace ST10263164_MCPETRIE_PROG6212.Controllers
 {
@@ -228,7 +233,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateClaim(Claim claim, IFormFile supportingDocuments) // This is the action method that will be called when the user submits the form on the CreateClaim page
+        public async Task<IActionResult> CreateClaim(Models.Claim claim, IFormFile supportingDocuments) // This is the action method that will be called when the user submits the form on the CreateClaim page
         {
             if (!ModelState.IsValid)
             {
@@ -253,6 +258,17 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             {
                 ModelState.AddModelError("SupportingDocument", "The supportingDocuments field is required.");
                 return View(claim);
+            }
+
+            if (claim.HoursWorked > 20 || claim.HourlyRate > 500) //automated claim approval if it meets the criteria else it will be set to pending
+            {
+                claim.OverallAproval = "pending";
+            }
+            else
+            {
+                claim.ProgrammeCoordinatorApproval = true;
+                claim.AcademicManagerApproval = true;
+                claim.OverallAproval = "Approved";
             }
 
             _dbContext.Claims.Add(claim);
@@ -297,6 +313,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        //-------------------------------------------------------------EDIT LECTURER-------------------------------------------------------------------------------
         [HttpGet]
         public IActionResult EditLecturer()
         {
@@ -363,6 +380,105 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                 return View("EditLecturer", lecturer); // Return the EditLecturer view with the model to show the error
             }
         }
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------CREATE DOC--------------------------------------------------------------------
+        
+        [HttpGet]
+        public IActionResult CreateDocument()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetClaimData(int claimId)
+        {
+            var findClaim = await _dbContext.Claims.FirstOrDefaultAsync(c => c.ClaimId == claimId);
+
+            if (findClaim == null)
+            {
+                ModelState.AddModelError("", "Claim not found.");
+                return View("CreateDocument");
+            }
+
+            var lecturer = await _dbContext.Lecturers.FirstOrDefaultAsync(l => l.LecturerId == findClaim.LecturerId);
+
+            if (lecturer == null)
+            {
+                ModelState.AddModelError("", "Lecturer not found.");
+                return View("CreateDocument");
+            }
+
+            var viewModel = new ClaimDocumentViewModel
+            {
+                ClaimId = findClaim.ClaimId,
+                ContractId = findClaim.ContractId,
+                HoursWorked = findClaim.HoursWorked,
+                HourlyRate = findClaim.HourlyRate,
+                ClaimTotal = findClaim.ClaimTotal,
+                SupportingDocument = findClaim.SupportingDocument,
+                ClaimDate = findClaim.ClaimDate,
+                LecturerId = lecturer.LecturerId,
+                LecturerName = lecturer.LecturerName,
+                LecturerSurname = lecturer.LecturerSurname,
+                LecturerEmail = lecturer.LecturerEmail,
+                LecturerContactNumber = lecturer.LecturerContactNumber
+            };
+
+            return View("CreateDocument", viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateInvoice(ClaimDocumentViewModel model) //edit this still
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("CreateDocument", model); // Return the CreateDocument view with the model to show validation errors
+            }
+
+            var pdfBytes = await Task.Run(() => GeneratePdfDocument(model));
+            return File(pdfBytes, "application/pdf", "ClaimDocument.pdf");
+        }
+
+        private byte[] GeneratePdfDocument(ClaimDocumentViewModel model)
+        {
+            try
+            {
+                //iTextSharp is used to create the document
+                using (var ms = new MemoryStream())
+                {
+                    var document = new Document();
+                    PdfWriter.GetInstance(document, ms);
+                    document.Open();
+
+                    // Adding data to the pdf document
+                    document.Add(new Paragraph($"Claim ID:\n{model.ClaimId}"));
+                    document.Add(new Paragraph($"Claim Date:\n{model.ClaimDate}"));
+                    document.Add(new Paragraph("---------------------------------------------"));
+                    document.Add(new Paragraph($"Lecturer Name:\n{model.LecturerName} {model.LecturerSurname}"));
+                    document.Add(new Paragraph($"Lecturer ID:\n{model.LecturerId}"));
+                    document.Add(new Paragraph($"Lecturer Email:\n{model.LecturerEmail}"));
+                    document.Add(new Paragraph($"Lecturer Number:\n{model.LecturerContactNumber}"));
+                    document.Add(new Paragraph("---------------------------------------------"));
+                    document.Add(new Paragraph($"Hours Worked:\n{model.HoursWorked}"));
+                    document.Add(new Paragraph($"Hourly Rate:\n{model.HourlyRate}"));
+                    document.Add(new Paragraph($"Claim Total:\n{model.ClaimTotal}"));
+                    document.Add(new Paragraph("---------------------------------------------"));
+                    document.Add(new Paragraph("Signature"));
+                    document.Add(new Paragraph("HR representitive"));
+
+
+                    document.Close();
+                    return ms.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
         public IActionResult Create(AcademicManager model) // This is the action method that will be called when the user submits the form on the Create page
@@ -382,4 +498,6 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
             return RedirectToAction("Index");
         }
     }
+
+
 }

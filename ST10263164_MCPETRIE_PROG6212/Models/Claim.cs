@@ -8,34 +8,15 @@ namespace ST10263164_MCPETRIE_PROG6212.Models
     {
         public int ClaimId { get; set; }
 
-        [Required]
         public string ContractId { get; set; }
 
-        private int _hoursWorked;
         [Required]
-        public int HoursWorked
-        {
-            get { return _hoursWorked; }
-            set
-            {
-                _hoursWorked = value;
-                CalculateClaimTotal(); // Recalculate when HoursWorked is set
-            }
-        }
+        public int HoursWorked { get; set; }
 
-        private int _hourlyRate;
         [Required]
-        public int HourlyRate
-        {
-            get { return _hourlyRate; }
-            set
-            {
-                _hourlyRate = value;
-                CalculateClaimTotal(); // Recalculate when HourlyRate is set
-            }
-        }
+        public int HourlyRate { get; set; }
 
-        public int ClaimTotal { get; private set; } // Storing this in the DB
+        public int ClaimTotal { get; set; }
 
         public byte[]? SupportingDocument { get; set; }
 
@@ -59,25 +40,18 @@ namespace ST10263164_MCPETRIE_PROG6212.Models
 
         public Claim()
         {
-            OverallAproval = "pending";
             ClaimDate = DateTime.Now;
-            HourlyRate = 0;
-            HoursWorked = 0;
-            CalculateClaimTotal(); // Initial calculation
+            OverallAproval = "pending";
         }
 
-        public Claim(int hourlyRate, int hoursWorked)
+        public Claim(int hoursWorked, int hourlyRate)
         {
-            OverallAproval = "pending";
-            ClaimDate = DateTime.Now;
-            HourlyRate = hourlyRate;
             HoursWorked = hoursWorked;
-            CalculateClaimTotal(); // Initial calculation
-        }
+            HourlyRate = hourlyRate;
+            ClaimDate = DateTime.Now;
 
-        private void CalculateClaimTotal()
-        {
-            ClaimTotal = HourlyRate * HoursWorked;
+            Console.WriteLine($"HoursWorked: {HoursWorked}, HourlyRate: {HourlyRate}");
+            Console.WriteLine($"OverallAproval: {OverallAproval}");
         }
     }
 

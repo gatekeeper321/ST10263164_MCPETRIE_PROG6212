@@ -1,0 +1,161 @@
+﻿@model ST10263164_MCPETRIE_PROG6212.Models.ClaimDocumentViewModel
+@{
+    ViewData["Title"] = "Generate Document";
+}
+<head>
+    <style>
+        .outer-container {
+            background-color: #007bff;
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .inner-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .inner-container p {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .inner-container .form-group {
+                margin-bottom: 20px;
+            }
+
+            .inner-container input {
+                text-align: left;
+                width: 100%;
+                width: 600px;
+                margin-bottom: 20px;
+            }
+
+        h2 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        .btn-submit {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 20px 20px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<div class="form-group outer-container">
+    <div class="form-group inner-container" style="margin-bottom: 20px; justify-content: center;">
+        <h1>Select a Lecturer ID to edit their details below:</h1>
+    </div>
+    <form asp-action="GetClaimData" method="post" enctype="multipart/form-data">
+        <div class="form-group inner-container" style="margin-bottom: 20px; justify-content: center;">
+            <div class="form-group">
+                <label asp-for="ClaimId" class="control-label">Claim ID</label>
+                <input asp-for="ClaimId" class="form-control" />
+                <span asp-validation-for="ClaimId" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="submit" value="Get Claim Detials" class="btn btn-primary" style="width: 200px; text-align: center;" />
+            </div>
+        </div>
+    </form>
+    @if (Model != null && Model.ClaimId > 0)
+    {
+        <form asp-action="CreateInvoice" method="post" enctype="multipart/form-data">
+            <div class="form-group inner-container" style="margin-bottom: 20px; justify-content: center;">
+                <div class="form-group">
+                    <label asp-for="ClaimId" class="control-label">Claim ID</label>
+                    <input asp-for="ClaimId" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="ClaimId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LecturerId" class="control-label">Lecturer ID</label>
+                    <input asp-for="LecturerId" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="LecturerId" class="text-danger"></span>
+                </div>
+
+                <!--Information from the lecturer table-->
+
+                <div class="form-group">
+                    <label asp-for="LecturerName" class="control-label">Lecturer ID</label>
+                    <input asp-for="LecturerName" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="LecturerName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LecturerSurname" class="control-label">Lecturer Surname</label>
+                    <input asp-for="LecturerSurname" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="LecturerSurname" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LecturerEmail" class="control-label">Lecturer Email</label>
+                    <input asp-for="LecturerEmail" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="LecturerEmail" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LecturerContactNumber" class="control-label">Lecturer Contact Number</label>
+                    <input asp-for="LecturerContactNumber" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="LecturerContactNumber" class="text-danger"></span>
+                </div>
+
+                <!--end of lecturer table information-->
+
+                <div class="form-group">
+                    <label asp-for="ContractId" class="control-label">Contract ID</label>
+                    <input asp-for="ContractId" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="ContractId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClaimDate" class="control-label">Claim Date</label>
+                    <input asp-for="ClaimDate" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="ClaimDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HoursWorked" class="control-label">Hours Worked</label>
+                    <input asp-for="HoursWorked" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="HoursWorked" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HourlyRate" class="control-label">Hourly Rate</label>
+                    <input asp-for="HourlyRate" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="HourlyRate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClaimTotal" class="control-label">Claim Total</label>
+                    <input asp-for="ClaimTotal" class="form-control" readonly=" readonly" />
+                    <span asp-validation-for="ClaimTotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Generate Claim Invoice" class="btn btn-primary" style="width: 300px; text-align: center;" />
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="form-group inner-container" style="margin-bottom: 20px; justify-content: center;">
+            <p>No Claim has been found with the Claim ID you have above</p>
+        </div>
+    }
+</div>
