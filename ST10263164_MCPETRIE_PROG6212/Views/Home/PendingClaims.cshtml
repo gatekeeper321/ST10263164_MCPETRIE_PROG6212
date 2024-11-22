@@ -85,7 +85,9 @@
                         <th>Lecturer ID</th>
                         <th>Contract ID</th>
                         <th>Supporting Documents</th>
-                        <th>Amount</th>
+                        <th>Hourly Rate</th>
+                        <th>Hours Worked</th>
+                        <th>Claim Total</th>
                         <th>Date Of Claim</th>
                         <th>Approve/Deny</th>
                     </tr>
@@ -102,6 +104,22 @@
                                     <td>@claim.LecturerId</td>
                                     <td>@claim.ContractId</td>
                                     <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
+                                    @if (claim.HourlyRate > 500)
+                                    {
+                                        <td style="color: red;">@claim.HourlyRate</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@claim.HourlyRate</td>
+                                    }
+                                    @if (@claim.HoursWorked > 20)
+                                    {
+                                        <td style="color: red;">@claim.HoursWorked</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@claim.HoursWorked</td>
+                                    }
                                     <td>@claim.ClaimTotal</td>
                                     <td>@claim.ClaimDate.ToString("MM/dd/yyyy")</td>
                                     <td>
