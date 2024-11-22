@@ -1,3 +1,10 @@
+/*
+ * WILLIAM MCPETRIE
+ * ST10263164
+ * PROG6212
+ * POE PART 3
+*/
+
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using Microsoft.AspNetCore.Mvc;

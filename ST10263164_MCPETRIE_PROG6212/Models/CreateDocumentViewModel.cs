@@ -1,4 +1,11 @@
-﻿using System.ComponentModel;
+﻿/*
+ * WILLIAM MCPETRIE
+ * ST10263164
+ * PROG6212
+ * POE PART 3
+*/
+
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

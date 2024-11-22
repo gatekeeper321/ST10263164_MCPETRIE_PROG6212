@@ -1,4 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*
+ * WILLIAM MCPETRIE
+ * ST10263164
+ * PROG6212
+ * POE PART 3
+*/
+
+using Microsoft.EntityFrameworkCore;
 using ST10263164_MCPETRIE_PROG6212.Models;
 
 namespace ST10263164_MCPETRIE_PROG6212.Data

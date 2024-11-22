@@ -1,4 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿/*
+ * WILLIAM MCPETRIE
+ * ST10263164
+ * PROG6212
+ * POE PART 3
+*/
+
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
