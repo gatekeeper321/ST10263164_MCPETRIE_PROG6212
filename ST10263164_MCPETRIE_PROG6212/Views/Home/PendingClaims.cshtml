@@ -103,8 +103,8 @@
                                     <td>@claim.ClaimId</td>
                                     <td>@claim.LecturerId</td>
                                     <td>@claim.ContractId</td>
-                                    <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td>
-                                    @if (claim.HourlyRate > 500)
+                                    <td><a href="@claim.SupportingDocument" target="_blank">Document</a></td> 
+                                    @if (claim.HourlyRate > 500) //checks if hourly rate is reason claim was not approved and if it is it will be highlighted red
                                     {
                                         <td style="color: red;">@claim.HourlyRate</td>
                                     }
@@ -112,7 +112,7 @@
                                     {
                                         <td>@claim.HourlyRate</td>
                                     }
-                                    @if (@claim.HoursWorked > 20)
+                                    @if (@claim.HoursWorked > 20) //checks if hourly rate is reason claim was not approved and if it is it will be highlighted red
                                     {
                                         <td style="color: red;">@claim.HoursWorked</td>
                                     }

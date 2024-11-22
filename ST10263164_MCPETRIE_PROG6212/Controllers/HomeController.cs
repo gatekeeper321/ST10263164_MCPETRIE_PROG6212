@@ -411,9 +411,9 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetClaimData(int claimId)
+        public async Task<IActionResult> GetClaimData(int claimId) //This action method fetches the claim from the database and populates the inputs with that data
         {
-            var findClaim = await _dbContext.Claims.FirstOrDefaultAsync(c => c.ClaimId == claimId);
+            var findClaim = await _dbContext.Claims.FirstOrDefaultAsync(c => c.ClaimId == claimId); //finds the claim using the claim id entered by the user
 
             if (findClaim == null)
             {
@@ -421,7 +421,7 @@ namespace ST10263164_MCPETRIE_PROG6212.Controllers
                 return View("CreateDocument");
             }
 
-            var lecturer = await _dbContext.Lecturers.FirstOrDefaultAsync(l => l.LecturerId == findClaim.LecturerId);
+            var lecturer = await _dbContext.Lecturers.FirstOrDefaultAsync(l => l.LecturerId == findClaim.LecturerId); //finds lecturr that made the claim using the lecturer id
 
             if (lecturer == null)
             {
